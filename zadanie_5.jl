@@ -1,26 +1,43 @@
-"""
-ДАНО: Робот - в произвольной клетке ограниченного прямоугольного поля, на котором могут находиться также внутренние прямоугольные перегородки (все перегородки изолированы друг от друга, прямоугольники могут вырождаться в отрезки) 
+#ДАНО: Робот - в произвольной клетке ограниченного прямоугольного поля, на котором могут находиться также внутренние прямоугольные перегородки (все перегородки изолированы друг от друга, прямоугольники могут вырождаться в отрезки)
 
-РЕЗУЛЬТАТ: Робот - в исходном положении и в углах поля стоят маркеры
-"""
-function mark_angles(r)
-    num_steps = through_rectangles_into_angle(r,(Sud,West))
-    for side in (Nord,Ost,Sud,West)
-        moves!(r,side) 
-        putmarker!(r)
-    end
-    move!(r,(Ost,Nord),num_steps) 
+#РЕЗУЛЬТАТ: Робот - в исходном положении и в углах поля стоят маркеры
+
+function main_glavn!(r::Robot)
+    path = leftDown(r) #Робот в левом нижнем углу и массив path создан
+
+    putmarker!(r)
+    moveSide!(r, Nord)
+    putmarker!(r)
+    moveSide!(r, Ost)
+    putmarker!(r)
+    moveSide!(r, Sud)
+    putmarker!(r)
+    moveSide!(r, West)
+    leftDown!(r, path)
 end
-function through_rectangles_into_angle(r,angle::NTuple{2,HorizonSide})
-    num_steps=[]
-    while isborder(r,angle[1])==false || isborder(r,angle[2]) # Робот - не в юго-западном углу
-        push!(num_steps, moves!(r, angle[2]))
-        push!(num_steps, moves!(r, angle[1]))
+function leftDown(r::Robot)
+    path = []
+    while isborder(r, West) == false || isborder(r, Sud) == false
+          if isborder(r, West) == false
+                move!(r, West)
+                push!(path, true)
+          else
+                move!(r, Sud)
+                push!(path, false)
+          end
     end
-    return num_steps
+    
+    return reverse!(path)
 end
-function moves!(r,sides,num_steps::Vector{Int})
-    for (i,n) in enumerate(reverse!(num_steps))
-        moves!(r, sides[mod(i-1, length(sides))+1], n)
+function leftDown!(r::Robot, path)
+    for i in path
+          if i move!(r, Ost)
+          else move!(r, Nord)
+          end
+    end
+end
+function moveSide!(r::Robot, side::HorizonSide)
+    while isborder(r, side) == false
+          move!(r, side)
     end
 end

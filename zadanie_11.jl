@@ -2,7 +2,7 @@
 
 #РЕЗУЛЬТАТ: Робот - в исходном положении, и в 4-х приграничных клетках, две из которых имеют ту же широту, а две - ту же долготу, что и Робот, стоят маркеры.
 
-function mark_centers(r)
+function mark_centers(r::Robot)
     num_steps = through_rectangles_into_angle(r,(Sud,West))
     # УТВ: Робот - в юго-западном углу и в num_steps - закодирован пройденный путь
     num_steps_to_ost = sum(num_steps[1:2:end])
@@ -30,3 +30,4 @@ function mark_centers(r)
     movements!(r,(Ost,Nord),num_steps)
     #УТВ: Робот - в исходном положении
 end
+//Пишем в терминале "using HorizonSideRobots", дальше "r=Robot(animate=true)", "include("zadanie_11.jl")", подконец "mark_centers(r)"

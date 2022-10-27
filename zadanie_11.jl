@@ -2,7 +2,7 @@
 
 #РЕЗУЛЬТАТ: Робот - в исходном положении, и в 4-х приграничных клетках, две из которых имеют ту же широту, а две - ту же долготу, что и Робот, стоят маркеры.
 
-function mark_centers(r::Robot)
+function mark_centers(r)
     num_steps = through_rectangles_into_angle(r,(Sud,West))
     # УТВ: Робот - в юго-западном углу и в num_steps - закодирован пройденный путь
     num_steps_to_ost = sum(num_steps[1:2:end])

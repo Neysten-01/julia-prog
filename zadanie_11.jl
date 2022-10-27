@@ -30,4 +30,4 @@ function mark_centers(r::Robot)
     movements!(r,(Ost,Nord),num_steps)
     #УТВ: Робот - в исходном положении
 end
-//Пишем в терминале "using HorizonSideRobots", дальше "r=Robot(animate=true)", "include("zadanie_11.jl")", подконец "mark_centers(r)"
+#Пишем в терминале "using HorizonSideRobots", дальше "r=Robot(animate=true)", "include("zadanie_11.jl")", подконец "mark_centers(r)"
